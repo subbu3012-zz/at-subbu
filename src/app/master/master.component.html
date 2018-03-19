@@ -1,0 +1,118 @@
+<nav class="navbar navbar-dark bg-dark sticky-top">
+    <button class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <span class="navbar-brand">{{masterType}}</span>
+</nav>
+<mat-progress-bar *ngIf="this.sharedServ.showProgressBar" mode="indeterminate"></mat-progress-bar>
+
+<div style="padding:15px 0px;" class="container">
+    <div class="card-columns">
+        <div style="border: #343a40 solid 3px;" align="center" class="card p-3">
+            <div *ngIf="this.masterType == 'address'" class="card-block">
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newAddressMaster.name" matInput placeholder="Address Name">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newAddressMaster.mobileNo" matInput placeholder="Mobile No">
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea [(ngModel)]="this.newAddressMaster.addressLine1" matInput placeholder="Address Line 1" matTextareaAutosize matAutosizeMinRows="2"
+                        matAutosizeMaxRows="5"></textarea>
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea [(ngModel)]="this.newAddressMaster.addressLine2" matInput placeholder="Address Line 2" matTextareaAutosize matAutosizeMinRows="2"
+                        matAutosizeMaxRows="5"></textarea>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newAddressMaster.city" matInput placeholder="City">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newAddressMaster.pincode" type="number" matInput placeholder="Pincode">
+                </mat-form-field>
+            </div>
+            <div *ngIf="this.masterType == 'agent'" class="card-block">
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newAgentMaster.name" matInput placeholder="Agent Name">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newAgentMaster.mobileNo" matInput placeholder="Mobile No">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newAgentMaster.pincodeRangeFrom" matInput placeholder="Pincode Range From">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newAgentMaster.pincodeRangeTo" type="number" matInput placeholder="Pincode Range To">
+                </mat-form-field>
+            </div>
+            <div *ngIf="this.masterType == 'test'" class="card-block">
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newTestMaster.name" matInput placeholder="Test Name">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newTestMaster.desc" matInput placeholder="Test Description">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input [(ngModel)]="this.newTestMaster.cost" type="number" matInput placeholder="Cost">
+                </mat-form-field>
+            </div>
+            <button style="background-color:#343a40;margin-top:2vh;color:#f2f2f2" mat-raised-button (click)="addMasterData()">
+                Add {{this.masterType}}
+            </button>
+        </div>
+        <div *ngIf="this.masterType == 'test'">
+            <div *ngFor="let test of this.sharedServ.testList;let i = index;">
+                <div [style.backgroundColor]="this.colorList[i%4]" class="card p-3">
+                    <div class="card-block">
+                        <h4 class="card-title">{{test.name}}</h4>
+                        <p class="card-text">
+                            <strong>Description : </strong>{{test.desc}}</p>
+                        <p class="card-text">
+                            <strong>Cost : </strong>{{test.cost}} /-</p>
+                        <footer>
+                            <small class="text-muted">{{test.createdDate}}</small>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="this.masterType == 'agent'">
+            <div *ngFor="let agent of this.sharedServ.agentList;let i = index;">
+                <div [style.backgroundColor]="this.colorList[i%4]" class="card p-3">
+                    <div class="card-block">
+                        <h4 class="card-title">{{agent.name}}</h4>
+                        <p class="card-text">
+                            <strong>Mobile No : </strong>{{agent.mobileNo}}</p>
+                        <p class="card-text">
+                            <strong>Pincode From : </strong>{{agent.pincodeRangeFrom}}</p>
+                        <p class="card-text">
+                            <strong>Pincode To : </strong>{{agent.pincodeRangeFrom}}</p>
+                        <footer>
+                            <small class="text-muted">{{agent.createdDate}}</small>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="this.masterType == 'address'">
+            <div *ngFor="let address of this.sharedServ.addressList;let i = index;">
+                <div [style.backgroundColor]="this.colorList[i%4]" class="card p-3">
+                    <div class="card-block">
+                        <h4 class="card-title">{{address.name}}</h4>
+                        <p class="card-text">
+                            <strong>Mobile No : </strong>{{address.mobileNo}}</p>
+                        <p class="card-text">
+                            {{address.addressLine1}},{{address.addressLine2}}</p>
+                        <p class="card-text">
+                            <strong>City : </strong>{{address.city}}</p>
+                        <p class="card-text">
+                            <strong>Pincode : </strong>{{address.pincode}}</p>
+                        <footer>
+                            <small class="text-muted">{{address.createdDate}}</small>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
