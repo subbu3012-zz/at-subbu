@@ -6,3 +6,16 @@
 mat-form-field{
     width: 100%
   }
+
+  mat-expansion-panel-header{
+    background-color: #454d54 !important;
+    color:white !important;
+}
+
+mat-panel-description,mat-panel-title{
+    color:white !important;   
+}
+
+.mat-expansion-indicator::after, .mat-expansion-panel-header-description{
+    color:white !important;
+}

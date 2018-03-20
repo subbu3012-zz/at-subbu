@@ -4,7 +4,7 @@ import { MasterComponent } from './master.component';
 
 const routes: Routes = [
     {
-        path: 'view/:master-type',
+        path: ':master-type',
         component: MasterComponent,
     },
     //  {

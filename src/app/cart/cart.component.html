@@ -1,35 +1,30 @@
 <div align="center" class="container">
     <div *ngFor="let order of this.newOrderList;let i = index;let l = last;" class="row">
-        <div class="col">
+        <div class="col-5">
             <mat-form-field>
                 <mat-select placeholder="Select Test" [(ngModel)]="order.testKey">
                     <mat-option *ngFor="let test of this.sharedServ.testList" [value]="test.$key">{{test.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col">
+        <div class="col-5">
             <mat-form-field>
                 <mat-select placeholder="Select Address" [(ngModel)]="order.addressKey">
                     <mat-option *ngFor="let address of this.sharedServ.addressList" [value]="address.$key">{{address.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col">
-            <mat-checkbox style="position: absolute;top: 24px;" (change)="index == last ? addNewOrder(i) : ''" [(ngModel)]="order.isChecked">
+        <div class="col-2">
+            <mat-checkbox style="position: absolute;top: 24px;" (change)="l ? addNewOrder() : ''" [(ngModel)]="order.isChecked">
             </mat-checkbox>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <button style="background-color:#343a40;margin-top:2vh;color:#f2f2f2" mat-raised-button (click)="checkoutOrder()">
-                Checkout
-            </button>
-        </div>
-        <div class="col">
-            <button style="background-color:#343a40;margin-top:2vh;color:#f2f2f2" mat-raised-button (click)="checkoutOrder()">
-                Add New Address
-            </button>
+    <div align="center">
+        <button style="background-color:#343a40;margin-top:2vh;color:#f2f2f2" mat-raised-button (click)="checkoutOrder()">
+            Checkout Orders
+        </button>
+        <div>
+            <a [routerLink]="['/master/address']" [routerLinkActive]="['router-link-active']" style="font-size:14px;color:steelblue;cursor:pointer">New Address?</a>
         </div>
     </div>
-
 </div>

@@ -13,7 +13,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router'
 })
 export class CartComponent implements OnInit, OnChanges {
 
-    constructor(public sharedServ: SharedService) {
+    constructor(public sharedServ: SharedService, public rtr: Router) {
 
     }
 
@@ -31,17 +31,22 @@ export class CartComponent implements OnInit, OnChanges {
         this.newOrderList.push(new OrderMaster());
     }
 
-    public addNewOrder(index: number) {
+    public addNewOrder() {
         this.newOrderList.push(new OrderMaster())
     }
 
     public checkoutOrder() {
+        this.sharedServ.showProgressBar = true;
         this.newOrderList.forEach(element => {
             if (element.isChecked && element.addressKey && element.testKey) {
                 element.agentKey = this.getAgentCodeForPincode(this.getPinCodeForAdress(element.addressKey));
                 this.sharedServ.addNewOrder(element);
             }
         })
+        setTimeout(() => {
+            this.rtr.navigate(['order']);
+            this.sharedServ.showProgressBar = false;
+        }, 3000);
     }
 
     public getPinCodeForAdress(key: string) {

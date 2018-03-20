@@ -5,6 +5,7 @@ const routes: Routes = [
   { path: 'master', loadChildren: './master/master.module#MasterModule' },
   { path: 'cart', loadChildren: './cart/cart.module#CartModule' },
   { path: 'order', loadChildren: './order/order.module#OrderModule' },
+  { path: '', redirectTo: 'order', pathMatch: 'full' }
 ];
 
 @NgModule({

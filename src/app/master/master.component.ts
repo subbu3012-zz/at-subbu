@@ -11,7 +11,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router'
     // animations: [routerTransition()],
     providers: []
 })
-export class MasterComponent implements OnInit, OnChanges {
+export class MasterComponent implements OnInit {
 
     public masterType;
     public colorList: string[] = COLORLIST;
@@ -27,17 +27,11 @@ export class MasterComponent implements OnInit, OnChanges {
 
     }
 
-    ngOnChanges() {
-        this.masterType = this.route.snapshot.paramMap.get('master-type');
-        // this.getMasterData();
-    }
-
     ngOnInit() {
-        this.masterType = this.route.snapshot.paramMap.get('master-type');
-        this.sharedServ.getMasterData(this.masterType);
-        this.route.paramMap.switchMap((params: ParamMap) =>
-            this.masterType = params.get('master-type')
-        );
+        this.route.params.subscribe((path: any) => {
+            this.masterType = path['master-type'];
+            this.sharedServ.getMasterData(this.masterType);
+        })
     }
 
     public addMasterData() {

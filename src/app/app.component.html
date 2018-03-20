@@ -1,0 +1,62 @@
+<nav class="navbar navbar-dark bg-dark sticky-top">
+    <button class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon" (click)="isSideNavActive = !isSideNavActive"></span>
+    </button>
+    <span class="navbar-brand">{{activeMenu}}</span>
+</nav>
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown link
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav> -->
+<nav class="sidebar" *ngIf="isSideNavActive" [ngClass]="{sidebarPushRight: isSideNavActive}">
+    <div class="list-group">
+        <a (click)="activeMenu = 'Your Cart'" routerLink="/cart" [routerLinkActive]="['router-link-active']" class="list-group-item py-4">
+            <i class="fa fa-fw fa-wrench"></i>&nbsp;{{'Your Cart'}}
+        </a>
+        <a (click)="activeMenu = 'Order List'" [routerLink]="['/order']" [routerLinkActive]="['router-link-active']" class="list-group-item py-4">
+            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Order List'}}
+        </a>
+        <a (click)="activeMenu = 'Address Master'" [routerLink]="['/master/address']" [routerLinkActive]="['router-link-active']"
+            class="list-group-item py-4">
+            <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Address Master'}}
+        </a>
+        <a (click)="activeMenu = 'Agent Master'" [routerLink]="['/master/agent']" [routerLinkActive]="['router-link-active']" class="list-group-item py-4">
+            <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'Agent Master'}}
+        </a>
+        <a (click)="activeMenu = 'Test Master'" [routerLink]="['/master/test']" [routerLinkActive]="['router-link-active']" class="list-group-item py-4">
+            <i class="fa fa-fw fa-desktop"></i>&nbsp;{{ 'Test Master'}}
+        </a>
+    </div>
+</nav>
+<mat-progress-bar [hidden]="!this.sharedServ.showProgressBar" mode="indeterminate"></mat-progress-bar>
+<section style="margin-top:3vh">
+    <router-outlet></router-outlet>
+</section>

@@ -28,12 +28,17 @@ export class OrderComponent implements OnInit, OnChanges {
         this.sharedServ.getMasterData("address");
         this.sharedServ.getMasterData("agent");
         this.sharedServ.getMasterData("order");
-        setTimeout(() => {
-            this.constructAgentVsOrderData();
-        }, 5000);
+        this.constructAgentVsOrderData();
     }
 
     public constructAgentVsOrderData() {
+        this.sharedServ.showProgressBar = true;
+        if (!this.sharedServ.agentList.length || !this.sharedServ.orderList) {
+            setTimeout(() => {
+                this.constructAgentVsOrderData();
+            }, 1000);
+            return;
+        }
         this.sharedServ.agentList.forEach(element => {
             this.agentVsOrderMasterData.push({
                 "agentKey": element.$key,
@@ -41,6 +46,7 @@ export class OrderComponent implements OnInit, OnChanges {
                 "orderList": this.getOrderMapDataForAgent(element.$key)
             });
         })
+        this.sharedServ.showProgressBar = false;
         console.log('this.agentVsOrderMasterData', this.agentVsOrderMasterData);
     }
 

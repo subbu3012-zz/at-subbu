@@ -1,23 +1,30 @@
-<mat-accordion>
-    <mat-expansion-panel *ngFor="let agentVsOrder of this.agentVsOrderMasterData">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                {{agentVsOrder.agentName}}
-            </mat-panel-title>
-            <mat-panel-description>
-                {{agentVsOrder.orderList.length}} Orders
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="row" *ngFor="let order of agentVsOrder.orderList ">
-            <div class="col-3">
-                {{order.testName}}
-            </div>
-            <div class="col-3">
-                {{order.addressName}}
-            </div>
-            <div class="col-6">
-                {{order.createdDate}}
-            </div>
-        </div>
-    </mat-expansion-panel>
-</mat-accordion>
+<div class="container">
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let agentVsOrder of this.agentVsOrderMasterData">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="col-5">
+                    {{agentVsOrder.agentName}}
+                </mat-panel-title>
+                <mat-panel-description class="col-5">
+                    {{agentVsOrder.orderList.length}} Orders
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <table style="margin-top:2vh" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col-3">Test Name</th>
+                        <th scope="col-3">Address Name</th>
+                        <th scope="col-6">Created Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of agentVsOrder.orderList">
+                        <td>{{order.testName}}</td>
+                        <td>{{order.addressName}}</td>
+                        <td>{{order.createdDate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
